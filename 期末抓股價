@@ -1,0 +1,38 @@
+import json
+import os 
+import openpyxl
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+stockid = ['1101', '1102']
+res = requests.get("https://stock.wearn.com/cdata.asp?kind="+str(stockid[0]))
+content = res.text
+soup = BeautifulSoup(content, 'lxml') 
+# print(res.text)
+# soup
+
+current = []
+for i in soup.findAll("tr", {"class": "stockalllistbg1"}):
+    row = []
+    for j in i.findAll("td"):
+        row.append(j.get_text())
+    current.append(row)
+for i in soup.findAll("tr", {"class": "stockalllistbg2"}):
+    row = []
+    for j in i.findAll("td"):
+        row.append(j.get_text())
+    current.append(row)
+    
+    # sorted(list, key=lambda current: (current[0]))
+current.sort(key=lambda row: row[0])
+pd.DataFrame(current)
+
+os.getcwd()
+
+wb = openpyxl.load_workbook(filename="data.xlsx")
+ws = wb["data"]
+for i in range(0, len(current)):
+    for j in range(0,6):
+        ws.cell(row= i + 1, column= j + 1).value = current[i][j]
+wb.save(filename="data.xlsx")
