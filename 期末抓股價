@@ -36,3 +36,13 @@ for i in range(0, len(current)):
     for j in range(0,6):
         ws.cell(row= i + 1, column= j + 1).value = current[i][j]
 wb.save(filename="data.xlsx")
+
+import datetime
+
+current[0][0]
+temp = "2018/05/03"
+datetime.datetime.strptime(temp, "%Y/%m/%d")
+
+datetime.datetime.strptime(temp, "%Y/%m/%d")
+
+datetime.datetime.now()>datetime.datetime.strptime(temp, "%Y/%m/%d")
