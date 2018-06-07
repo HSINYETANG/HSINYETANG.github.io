@@ -46,3 +46,54 @@ datetime.datetime.strptime(temp, "%Y/%m/%d")
 datetime.datetime.strptime(temp, "%Y/%m/%d")
 
 datetime.datetime.now()>datetime.datetime.strptime(temp, "%Y/%m/%d")
+
+report = []
+
+wb = openpyxl.load_workbook(filename="data.xlsx")
+ws = wb["data"]
+i = 0
+while(ws.cell(row= i + 1, column= j + 1).value!=None):
+    row = []
+    for j in range(0,6):
+        row.append(ws.cell(row= i + 1, column= j + 1).value)
+    report.append(row)
+    i = i + 1
+wb.save(filename="data.xlsx")
+
+report[-1][0]
+
+report[-1][0].split("/")
+
+int(report[-1][0].split("/")[0])+1911
+
+str(int(report[-1][0].split("/")[0])+1911)+"/"+report[-1][0].split("/")[1]+"/"+report[-1][0].split("/")[2]
+
+a = str(int(report[-1][0].split("/")[0])+1911)+"/"+report[-1][0].split("/")[1]+"/"+report[-1][0].split("/")[2]
+
+a = datetime.datetime.strptime(a, "%Y/%m/%d")
+
+temp = "2018/06/06"
+temp = datetime.datetime.strptime(temp, "%Y/%m/%d")
+
+a
+
+temp
+
+a < temp
+
+row = []
+row.append(a)
+row.append(10)
+row.append(10)
+row.append(10)
+row.append(10)
+row.append(10)
+report.append(row)
+
+report
+
+b=report[0][1].replace("\xa0","")
+c=report[0][2].replace("\xa0","")
+
+print(b)
+print(c)
