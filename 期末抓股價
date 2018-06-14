@@ -92,8 +92,22 @@ report.append(row)
 
 report
 
+for i in range(0, len(report)):
+    for j in range(0, 6):
+        if(isinstance(report[i][j], str)):
+            if("\xa0" in report[i][j]):
+                report[i][j] = report[i][j].replace("\xa0","")
+                
+report
+
 b=report[0][1].replace("\xa0","")
 c=report[0][2].replace("\xa0","")
+d=report[0][3].replace("\xa0","")
+e=report[0][4].replace("\xa0","")
+f=report[0][5].replace("\xa0","")
 
-print(b)
-print(c)
+print("開盤價= "+b)
+print("最高價= "+c)
+print("最低價= "+d)
+print("收盤價= "+e)
+print("成交量= "+f)
