@@ -30,19 +30,10 @@ pd.DataFrame(current)
 
 os.getcwd()
 
-wb = openpyxl.load_workbook(filename="data.xlsx")
-ws = wb["data"]
-for i in range(0, len(current)):
-    for j in range(0,6):
-        ws.cell(row= i + 1, column= j + 1).value = current[i][j]
-wb.save(filename="data.xlsx")
-
 import datetime
 
 current[0][0]
 temp = "2018/05/03"
-datetime.datetime.strptime(temp, "%Y/%m/%d")
-
 datetime.datetime.strptime(temp, "%Y/%m/%d")
 
 datetime.datetime.now()>datetime.datetime.strptime(temp, "%Y/%m/%d")
@@ -60,51 +51,7 @@ while(ws.cell(row= i + 1, column= j + 1).value!=None):
     i = i + 1
 wb.save(filename="data.xlsx")
 
-report[-1][0]
-
-report[-1][0].split("/")
-
-int(report[-1][0].split("/")[0])+1911
-
-str(int(report[-1][0].split("/")[0])+1911)+"/"+report[-1][0].split("/")[1]+"/"+report[-1][0].split("/")[2]
-
-a = str(int(report[-1][0].split("/")[0])+1911)+"/"+report[-1][0].split("/")[1]+"/"+report[-1][0].split("/")[2]
-
-a = datetime.datetime.strptime(a, "%Y/%m/%d")
-
-temp = "2018/06/06"
-temp = datetime.datetime.strptime(temp, "%Y/%m/%d")
-
-a
-
-temp
-
-a < temp
-
-row = []
-row.append(a)
-row.append(10)
-row.append(10)
-row.append(10)
-row.append(10)
-row.append(10)
-report.append(row)
-
 report
-
-for i in range(0, len(report)):
-    for j in range(0, 6):
-        if(isinstance(report[i][j], str)):
-            if("\xa0" in report[i][j]):
-                report[i][j] = report[i][j].replace("\xa0","")
-                
-report
-
-b=report[0][1].replace("\xa0","")
-c=report[0][2].replace("\xa0","")
-d=report[0][3].replace("\xa0","")
-e=report[0][4].replace("\xa0","")
-f=report[0][5].replace("\xa0","")
 
 print("開盤價= "+b)
 print("最高價= "+c)
