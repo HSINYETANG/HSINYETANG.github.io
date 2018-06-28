@@ -1,8 +1,9 @@
 import json
 import os 
 import openpyxl
-
+import datetime
 import requests
+
 from bs4 import BeautifulSoup
 import pandas as pd
 stockid = ['1101', '1102']
@@ -28,11 +29,17 @@ for i in soup.findAll("tr", {"class": "stockalllistbg2"}):
 current.sort(key=lambda row: row[0])
 pd.DataFrame(current)
 
+
+wb = openpyxl.load_workbook(filename="data.xlsx")
+ws = wb["data"]
+for i in range(0,len(current)):
+    for j in range(0,6):
+        ws.cell(row=i+1,column=j+1).value=current[i][j]
+wb.save(filename="data.xlsx")
+
 以上就可把資料匯到EXCEL中了
 
 os.getcwd()
-
-import datetime
 
 report[-1][0]
 report[-1][0].split('/')
