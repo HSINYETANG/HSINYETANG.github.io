@@ -1,0 +1,63 @@
+import requests
+import json
+import time
+import pprint
+import time
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+
+def timestamp_datetime(value):
+    format = '%Y/%m/%d'
+    value = time.localtime(value)
+    dt = time.strftime(format, value)
+    return dt
+    
+def datetime_timestamp(dt):
+    time.strptime(dt, '%Y/%m/%d')
+    s = time.mktime(time.strptime(dt, '%Y/%m/%d'))
+    return int(s)
+    
+url = "https://fund.cnyes.com/api/v1/fund/B09%2C071/nav?format=table&page="
+for num in range(1, 20):
+    get_url = url + str(num)
+    res = requests.get(get_url)
+    content = res.text
+    soup = BeautifulSoup(content, 'lxml')
+    data = json.loads(content)
+    webdatas = data["items"]
+    for x in range (10):
+        s = timestamp_datetime(data["items"]["data"][x]["tradeDate"])
+        g = data["items"]["data"][x]["nav"]
+        print(s)
+        print(g)
+        
+name = []
+url = "https://fund.cnyes.com/api/v1/fund/B09%2C071/nav?format=table&page="
+for num in range(1, 20):
+    get_url = url + str(num)
+    res = requests.get(get_url)
+    content = res.text
+    soup = BeautifulSoup(content, 'lxml')
+    data = json.loads(content)
+    webdatas = data["items"]
+    for x in range(0,10):
+        row = []
+        s = timestamp_datetime(data["items"]["data"][x]["tradeDate"])
+        g = data["items"]["data"][x]["nav"]
+        row.append(g)
+        row.append(s)
+        name.append(row)
+        
+name.reverse()
+
+import openpyxl
+import os
+wb = openpyxl.load_workbook(filename="fundprice.xlsx")
+ws = wb["貝萊德美國增長型基金基金"]
+for a in range(0, 2):
+    for j in range (0, len(name)):
+           ws.cell(row= j + 1, column= a + 1).value = name[j][a]
+
+wb.save(filename="fundprice.xlsx")
